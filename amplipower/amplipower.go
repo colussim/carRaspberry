@@ -4,10 +4,11 @@ import (
     "flag"
     "fmt"
     "log"
-    "periph.io/x/periph/conn/gpio"
-    "periph.io/x/periph/conn/gpio/rpi"
-    "periph.io/x/periph/devices/gpio"
-    "periph.io/x/periph/host"
+
+    "time"
+    "periph.io/x/conn/v3/gpio"
+    "periph.io/x/conn/v3/gpio/gpioreg"
+    "periph.io/x/host/v3"
 )
 
 func main() {
