@@ -5,7 +5,6 @@ import (
     "fmt"
     "log"
 
-    "time"
     "periph.io/x/conn/v3/gpio"
     "periph.io/x/conn/v3/gpio/gpioreg"
     "periph.io/x/host/v3"
