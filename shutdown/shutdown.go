@@ -18,7 +18,7 @@ func main() {
 	r := raspi.NewAdaptor()
 
 	// Create a GPIO button driver for the button connected to GPIO 3
-	button := gpio.NewButtonDriver(r, "3")
+	button := gpio.NewButtonDriver(r, "P1_5")
 
 	// Create the Gobot robot
 	robot := gobot.NewRobot("buttonBot",
