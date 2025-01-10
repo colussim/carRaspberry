@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"periph.io/x/conn/v3/gpio"
-	//"periph.io/x/conn/v3/gpio/gpioreg"
+	"periph.io/x/conn/v3/gpio/gpioreg"
 	"periph.io/x/host/v3"
 )
 
@@ -19,7 +19,7 @@ func main() {
 	}
 
 	// Obtenir la référence au GPIO 3
-	pin := gpio.Pin(3)
+	pin := gpioreg.ByName("P1_5")
 
 	// Configurer le GPIO comme entrée avec une résistance de tirage vers le haut
 	if err := pin.In(gpio.PullUp, gpio.FallingEdge); err != nil {
