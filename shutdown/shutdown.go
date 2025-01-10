@@ -9,15 +9,15 @@ import (
 
 	shutdown "github.com/klauspost/shutdown2"
 	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/rpi"
+	"gobot.io/x/gobot/platforms/raspi"
 )
 
 func main() {
 	// Configure a new Raspberry Pi instance
-	r := rpi.NewAdaptor()
+	r := raspi.NewAdaptor()
 
 	// Configure GPIO Pin 3 (P1_5) as an input with a pull-up resistor
-	button := rpi.NewButtonDriver(r, "3")
+	button := raspi.NewButtonDriver(r, "3")
 
 	// Creating a Gobot robot
 	robot := gobot.NewRobot("buttonBot",
