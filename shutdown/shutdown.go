@@ -29,10 +29,8 @@ func main() {
 	button.On(raspi.ButtonPush, func(data interface{}) {
 		fmt.Println("Button pressed, initiating shutdown...")
 
-		// You can set a timeout if necessary, though it's optional
-		shutdown.SetTimeout(time.Second * 4)
-
 		// Perform shutdown, signaling shutdown listeners
+		shutdown.SetTimeout(time.Second * 4)
 		shutdown.Shutdown()
 
 		// Wait for all shutdown handlers to complete
@@ -58,6 +56,6 @@ func main() {
 		os.Exit(0) // Exit the program after shutdown
 	}()
 
-	// Run the robot
+	// Start the robot
 	robot.Start()
 }
