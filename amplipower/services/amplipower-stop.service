@@ -1,0 +1,14 @@
+[Unit]
+Description=Stop Amplificateur
+DefaultDependencies=no
+Before=shutdown.target reboot.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/amplipower -command=stop
+StandardOutput=append:/var/log/amplipower-stop.log
+StandardError=append:/var/log/amplipower-stop-error.log
+
+[Install]
+WantedBy=halt.target reboot.target

@@ -1,0 +1,17 @@
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=ervice to control the Audio amplifier
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/amplipower -command=start
+StandardOutput=append:/var/log/amplipower.log
+StandardError=append:/var/log/amplipower-error.log
+
+[Install]
+WantedBy=multi-user.target
+

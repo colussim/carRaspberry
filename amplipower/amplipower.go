@@ -17,7 +17,7 @@ func main() {
     }
 
     // Configuration du GPIO
-    pin := gpioreg.ByName("P1_18") // Remplacez par le nom correct de la broche que vous utilisez
+    pin := gpioreg.ByName("P1_16") // Remplacez par le nom correct de la broche que vous utilisez
     if pin == nil {
         log.Fatal("Erreur : la broche GPIO P1_18 n'est pas disponible.")
     }
