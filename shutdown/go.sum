@@ -1,0 +1,4 @@
+github.com/klauspost/shutdown2 v1.1.0 h1:Ko7jOzYA2U1yjCOIKVKOhJMwEVHPgFmfG41pE8ozbUs=
+github.com/klauspost/shutdown2 v1.1.0/go.mod h1:mBV6CN9vNPEhvb8sPeC+qZnt2HxY2ziPnlSGgZkYNTQ=
+golang.org/x/net v0.34.0 h1:Mb7Mrk043xzHgnRM88suvJFwzVrRfHEHJEl5/71CKw0=
+golang.org/x/net v0.34.0/go.mod h1:di0qlW3YNM5oh6GqDGQr92MyTozJPmybPK4Ev/Gm31k=
