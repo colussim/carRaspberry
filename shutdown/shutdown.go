@@ -9,8 +9,7 @@ import (
 
 	shutdown "github.com/klauspost/shutdown2"
 	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/raspi"
-)
+	"gobot.io/x/gobot/platforms/raspi" 
 
 func main() {
 	// Configure a new Raspberry Pi instance
@@ -25,8 +24,8 @@ func main() {
 		[]gobot.Device{button},
 	)
 
-	// When the button is pressed, execute stop
-	button.On(gobot.ButtonPush, func(data interface{}) {
+	// When the button is pressed, execute shutdown
+	button.On(raspi.ButtonPush, func(data interface{}) {
 		fmt.Println("Button pressed, initiating shutdown...")
 
 		// You can set a timeout if necessary, though it's optional
