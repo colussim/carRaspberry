@@ -9,7 +9,8 @@ import (
 
 	shutdown "github.com/klauspost/shutdown2"
 	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/raspi" 
+	"gobot.io/x/gobot/platforms/raspi"
+)
 
 func main() {
 	// Configure a new Raspberry Pi instance
