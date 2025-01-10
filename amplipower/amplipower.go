@@ -18,6 +18,8 @@ const MESSAGE_STOP = "✅ Amplifier stopped..."
 var logger *logrus.Logger
 
 func main() {
+	logger = logrus.New()
+
 	// Init periph
 	if _, err := host.Init(); err != nil {
 		logrus.Fatalf("\n❌ Peripheral initialization error: %w", err)
