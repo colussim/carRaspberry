@@ -2,7 +2,7 @@
 WantedBy=multi-user.target
 
 [Unit]
-Description=ervice to control the Audio amplifier
+Description=service to control the Audio amplifier
 After=network.target
 
 [Service]

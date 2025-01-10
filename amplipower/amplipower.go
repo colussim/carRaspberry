@@ -1,45 +1,55 @@
 package main
 
 import (
-    "flag"
-    "fmt"
-    "log"
+	"flag"
+	"os"
 
-    "periph.io/x/conn/v3/gpio"
-    "periph.io/x/conn/v3/gpio/gpioreg"
-    "periph.io/x/host/v3"
+	"github.com/sirupsen/logrus"
+	"periph.io/x/conn/v3/gpio"
+	"periph.io/x/conn/v3/gpio/gpioreg"
+	"periph.io/x/host/v3"
 )
 
+// Replace with the correct name of the pin you are using
+const GPIO_PIN_NAME = "P1_16"
+const MESSAGE_START = "✅ Amplifier started..."
+const MESSAGE_STOP = "✅ Amplifier stopped..."
+
+var logger *logrus.Logger
+
 func main() {
-    // Initialiser periph
-    if _, err := host.Init(); err != nil {
-        log.Fatalf("Erreur d'initialisation de periph: %v", err)
-    }
+	// Init periph
+	if _, err := host.Init(); err != nil {
+		logrus.Fatalf("\n❌ Peripheral initialization error: %w", err)
+		os.Exit(1)
+	}
 
-    // Configuration du GPIO
-    pin := gpioreg.ByName("P1_16") // Remplacez par le nom correct de la broche que vous utilisez
-    if pin == nil {
-        log.Fatal("Erreur : la broche GPIO P1_18 n'est pas disponible.")
-    }
+	// Configuration GPIO
+	pin := gpioreg.ByName(GPIO_PIN_NAME)
+	if pin == nil {
+		logrus.Fatalf("❌ Error : GPIO pin %s is not available.", GPIO_PIN_NAME)
+		os.Exit(1)
+	}
 
-    // Configurer le GPIO en sortie
-    if err := pin.Out(gpio.Low); err != nil {
-        log.Fatalf("Erreur lors de la configuration de la broche GPIO : %v", err)
-    }
+	// Configuring the output GPIO line
+	if err := pin.Out(gpio.Low); err != nil {
+		logrus.Fatalf("❌ GPIO pin configuration error : %v", err)
+		os.Exit(1)
+	}
 
-    // Lecture de la commande
-    command := flag.String("command", "", "start or stop")
-    flag.Parse()
+	// Reading the command line
+	command := flag.String("command", "", "start or stop")
+	flag.Parse()
 
-    // Exécuter la commande appropriée
-    switch *command {
-    case "start":
-        pin.Out(gpio.High) // Ouvrir le MOSFET
-        fmt.Println("Amplificateur démarré.")
-    case "stop":
-        pin.Out(gpio.Low) // Fermer le MOSFET
-        fmt.Println("Amplificateur arrêté.")
-    default:
-        fmt.Println("Erreur : utilisez 'start' ou 'stop'.")
-    }
+	// Run the appropriate command
+	switch *command {
+	case "start":
+		pin.Out(gpio.High) // Open MOSFET
+		logger.Infof(MESSAGE_START)
+	case "stop":
+		pin.Out(gpio.Low) // CloseMOSFET
+		logger.Infof(MESSAGE_STOP)
+	default:
+		logger.Infof("❌ Erreur : Usage: amplipower -command=<start> || <stop>")
+	}
 }

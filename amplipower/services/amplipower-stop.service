@@ -1,5 +1,5 @@
 [Unit]
-Description=Stop Amplificateur
+Description=Stop Amplifier
 DefaultDependencies=no
 Before=shutdown.target reboot.target
 
