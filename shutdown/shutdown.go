@@ -27,7 +27,7 @@ func main() {
 	)
 
 	// When the button is pressed, execute shutdown
-	button.On(raspi.ButtonPush, func(data interface{}) {
+	button.On(gpio.ButtonPush, func(data interface{}) {
 		fmt.Println("Button pressed, initiating shutdown...")
 
 		// Perform shutdown, signaling shutdown listeners
