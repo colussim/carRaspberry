@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
 	"time"
 
+	"github.com/sirupsen/logrus"
 	"periph.io/x/conn/v3/gpio"
 	"periph.io/x/conn/v3/gpio/gpioreg"
 	"periph.io/x/host/v3"
@@ -14,33 +14,35 @@ import (
 const GPIO_PIN_NAME = "P1_5"
 
 func main() {
-	// Initialiser le périphérique
+	logger = logrus.New()
+
+	// Initialize device
 	if _, err := host.Init(); err != nil {
-		fmt.Printf("Erreur d'initialisation du périphérique: %v\n", err)
+		logger.Fatalf("\n❌Device initialization error: %v\n", err)
 		os.Exit(1)
 	}
 
-	// Obtenir la référence au GPIO 3
+	// OGet GPIO 3 reference
 	pin := gpioreg.ByName(GPIO_PIN_NAME)
 
-	// Configurer le GPIO comme entrée avec une résistance de tirage vers le haut
+	// Configure GPIO as input with pull-up resistor
 	if err := pin.In(gpio.PullUp, gpio.FallingEdge); err != nil {
-		fmt.Printf("Erreur lors de la configuration du pin: %v\n", err)
+		logger.Fatalf("\n❌Pin configuration error: %v\n", err)
 		os.Exit(1)
 	}
 
-	fmt.Println("En attente de l'appui sur le bouton...")
+	logger.Infof("Waiting for the button to be pressed...")
 
-	// Boucle pour surveiller l'état du bouton
+	// Loop to monitor button status
 	for {
-		// Attendre que le bouton soit pressé
+		// Wait for the button to be pressed
 		if pin.Read() == gpio.Low {
-			fmt.Println("Bouton pressé, arrêt en cours...")
-			// Exécuter la commande d’arrêt
+			logger.Infof("✅ Button pressed, stop in progress...")
+			// Execute stop command
 			exec.Command("sudo", "halt").Run()
 			break
 		}
-		// Pause pour éviter de saturer le CPU
+
 		time.Sleep(100 * time.Millisecond)
 	}
 }
