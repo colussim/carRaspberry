@@ -1,0 +1,10 @@
+Unit]
+Description=Button Listener for Raspberry Pi
+
+[Service]
+ExecStart=/usr/local/bin/button_shutdown
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
