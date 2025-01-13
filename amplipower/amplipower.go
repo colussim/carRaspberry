@@ -22,20 +22,20 @@ func main() {
 
 	// Init periph
 	if _, err := host.Init(); err != nil {
-		logrus.Fatalf("\n❌ Peripheral initialization error: %w", err)
+		logger.Fatalf("\n❌ Peripheral initialization error: %w", err)
 		os.Exit(1)
 	}
 
 	// Configuration GPIO
 	pin := gpioreg.ByName(GPIO_PIN_NAME)
 	if pin == nil {
-		logrus.Fatalf("❌ Error : GPIO pin %s is not available.", GPIO_PIN_NAME)
+		logger.Fatalf("❌ Error : GPIO pin %s is not available.", GPIO_PIN_NAME)
 		os.Exit(1)
 	}
 
 	// Configuring the output GPIO line
 	if err := pin.Out(gpio.Low); err != nil {
-		logrus.Fatalf("❌ GPIO pin configuration error : %v", err)
+		logger.Fatalf("❌ GPIO pin configuration error : %v", err)
 		os.Exit(1)
 	}
 
@@ -52,6 +52,6 @@ func main() {
 		pin.Out(gpio.Low) // CloseMOSFET
 		logger.Infof(MESSAGE_STOP)
 	default:
-		logger.Infof("❌ Erreur : Usage: amplipower -command=<start> || <stop>")
+		logger.Infof("❌ Error : Usage: amplipower -command=<start> || <stop>")
 	}
 }
