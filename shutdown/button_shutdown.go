@@ -11,6 +11,8 @@ import (
 	"periph.io/x/host/v3"
 )
 
+const GPIO_PIN_NAME = "P1_5"
+
 func main() {
 	// Initialiser le périphérique
 	if _, err := host.Init(); err != nil {
@@ -19,7 +21,7 @@ func main() {
 	}
 
 	// Obtenir la référence au GPIO 3
-	pin := gpioreg.ByName("P1_5")
+	pin := gpioreg.ByName(GPIO_PIN_NAME)
 
 	// Configurer le GPIO comme entrée avec une résistance de tirage vers le haut
 	if err := pin.In(gpio.PullUp, gpio.FallingEdge); err != nil {
