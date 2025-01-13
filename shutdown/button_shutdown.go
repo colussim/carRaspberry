@@ -14,7 +14,7 @@ import (
 const GPIO_PIN_NAME = "P1_5"
 
 func main() {
-	logger = logrus.New()
+	logger := logrus.New()
 
 	// Initialize device
 	if _, err := host.Init(); err != nil {
